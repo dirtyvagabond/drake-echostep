@@ -1,11 +1,11 @@
 drake-echostep
 ==============
 
-A simple, illustrative plugin for Drake.
+A simple plugin for Drake. Illustrates how to extend Drake with a custom protocol.
 
-Includes `src/drake/echostep.clj`, an implementation of the `echostep` protocol, which simply dumps all the step data into the output file. So you can use this plugin to inspect the step data model.
+Includes `src/drake/echostep.clj`, an implementation of the `echostep` protocol. The `echostep` protocol pretty prints all step data into the step's output file. So you can use this plugin to easily inspect Drake's step data model. Super handy when you're implementing your own protocol and need to know how to get out specific step data.
 
-To use, include the plugin in our `plugins.edn` file in your Drake workflow dir. E.g.:
+This plugin has been deployed to Clojars. To use it, include the plugin in your `plugins.edn` file in your Drake workflow dir. E.g.:
 ```clojure
 {:plugins [[dirtyvagabond/drake-echostep "0.1.0"]]}
 ```
@@ -13,7 +13,8 @@ To use, include the plugin in our `plugins.edn` file in your Drake workflow dir.
 Then your Drake workflow can use the `echostep` protocol, e.g.:
 
 ```clojure
-; Writes all step data to step.out. Assuming your workflow is in Drakefile:
+; Writes all step data to step.out.
+; Assuming your workflow is in Drakefile:
 ; drake +=step.out
 step.out <- [echostep +myopt]
   A command
@@ -21,4 +22,4 @@ step.out <- [echostep +myopt]
   last command
 ```
 
-This project also implements `bandit-protocol` as a demonstration of bundling more than one protocol implementations in a single plugin. It also demonstrates setting the `no-cmds-required` option, as well as using a dash in your protocol name. See `src/drake/bandit_protocol.clj`.
+This project also implements `bandit-protocol` as a demonstration of bundling more than one protocol implementation in a single plugin. It also demonstrates setting the `no-cmds-required` option, as well as using a dash in your protocol name. See `src/drake/bandit_protocol.clj`.
