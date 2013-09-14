@@ -3,11 +3,14 @@ drake-echostep
 
 A simple plugin for Drake. Illustrates how to extend Drake with a custom protocol.
 
-Includes `src/drake/echostep.clj`, an implementation of the `echostep` protocol. The `echostep` protocol pretty prints all step data into the step's output file. So you can use this plugin to easily inspect Drake's step data model. Super handy when you're implementing your own protocol and need to know how to get out specific step data.
+Includes `src/drake/protoocol/echostep.clj`, an implementation of the `echostep` protocol. The `echostep` protocol pretty prints all step data into the step's output file. So you can use this plugin to easily inspect Drake's step data model. Super handy when you're implementing your own protocol and need to know how to get out specific step data.
 
+Includes `src/drake/fs/mock.clj`, an implementation of a Drake FileSystem.
+
+**TODO!**
 This plugin has been deployed to Clojars. To use it, include the plugin in your `plugins.edn` file in your Drake workflow dir. E.g.:
 ```clojure
-{:plugins [[dirtyvagabond/drake-echostep "0.1.0"]]}
+{:plugins [[dirtyvagabond/drake-echostep "0.2.0"]]}
 ```
 
 Then your Drake workflow can use the `echostep` protocol, e.g.:
