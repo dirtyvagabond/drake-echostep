@@ -1,10 +1,10 @@
-(ns drake.fs.mock
+(ns drake.fs.myfs
   "A simple demonstration of an fs implementation for a Drake plugin.
-   Provides a mock fs."
+   Provides a custom filesystem, myfs"
   (:use [drake-interface.core :only [FileSystem]]
         [clojure.string :only [join split]]))
 
-(def ^:private MOCK-FS-DATA
+(def ^:private MYFS-DATA
   {"/A" {:mod-time 108}
    "/B" {:mod-time 107}
    "/C" {:mod-time 106}
@@ -39,26 +39,26 @@
     (str (if (empty? (first spl)) "/" "")
          (join "/" (filter (complement empty?) spl)))))
 
-(defn mock
+(defn myfs
   []
   (reify FileSystem
     (exists? [_ path]
-      (contains? MOCK-FS-DATA path))
+      (contains? MYFS-DATA path))
     (directory? [_ path]
-      (get-in MOCK-FS-DATA path :directory))
+      (get-in MYFS-DATA path :directory))
     (mod-time [this path]
       (if-not (.exists? this path)
         (throw (Exception. (str "file not found: " path)))
-        (condp = (:mod-time (MOCK-FS-DATA path))
+        (condp = (:mod-time (MYFS-DATA path))
           :pre (Long/MIN_VALUE)
           :now (System/currentTimeMillis)
-          (:mod-time (MOCK-FS-DATA path)))))
+          (:mod-time (MYFS-DATA path)))))
     (file-seq [_ path]
       (keys (filter (fn [[name opts]]
                       ;; skip directories
                       (and (not (opts :directory))
                            (.startsWith name path)))
-                    MOCK-FS-DATA)))
+                    MYFS-DATA)))
     (file-info [this path]
       (file-info-impl this path))
     (file-info-seq [this path]

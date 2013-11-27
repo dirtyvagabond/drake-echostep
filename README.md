@@ -3,13 +3,19 @@ drake-echostep
 
 An example plugin for Drake. Illustrates how to extend Drake with a custom protocol.
 
-Includes `src/drake/protoocol/echostep.clj`, an implementation of the `echostep` protocol. The `echostep` protocol pretty prints all step data into the step's output file. So you can use this plugin to easily inspect Drake's step data model. Super handy when you're implementing your own protocol and need to know how to get out specific step data.
+Includes `src/drake/protoocol/echostep.clj`, an implementation of the `echostep`
+protocol. The `echostep` protocol pretty prints all step data into the step's
+ output file. So you can use this plugin to easily inspect Drake's step data
+ model. Super handy when you're implementing your own protocol and need to know
+ how to get out specific step data.
 
-Includes `src/drake/fs/mock.clj`, an implementation of a Drake FileSystem.
+Includes `src/drake/fs/myfs.clj`, an implementation of a custom Drake FileSystem
+called myfs.
 
-This plugin has been deployed to Clojars. To use it, include the plugin in your `plugins.edn` file in your Drake workflow dir. E.g.:
+This plugin has been deployed to Clojars. To use it, include the plugin in your
+`plugins.edn` file in your Drake workflow dir. E.g.:
 ```clojure
-{:plugins [[dirtyvagabond/drake-echostep "0.2.0"]]}
+{:plugins [[dirtyvagabond/drake-echostep "0.2.1"]]}
 ```
 
 Then your Drake workflow can use the `echostep` protocol, e.g.:
@@ -24,6 +30,18 @@ step.out <- [echostep +myopt]
   last command
 ```
 
-This project also implements `bandit-protocol` as a demonstration of bundling more than one protocol implementation in a single plugin. It also demonstrates setting the `no-cmds-required` option, as well as using a dash in your protocol name. See `src/drake/bandit_protocol.clj`.
+Your workflow can also demonstrate using the myfs Filesystem, e.g.:
 
-For more information about Drake plugins, please see [the Plugins wiki page](https://github.com/Factual/drake/wiki/Plugins).
+```clojure
+; Writes the input filename to the output file
+out.txt <- myfs:/A
+  echo $INPUT > $OUTPUT
+```
+
+This project also implements `bandit-protocol` as a demonstration of bundling
+more than one protocol implementation in a single plugin. It also demonstrates
+setting the `no-cmds-required` option, as well as using a dash in your protocol
+name. See `src/drake/bandit_protocol.clj`.
+
+For more information about Drake plugins, please see
+[the Plugins wiki page](https://github.com/Factual/drake/wiki/Plugins).
