@@ -5,21 +5,21 @@
         [clojure.string :only [join split]]))
 
 (def ^:private MOCK-FS-DATA
-  {"A" {:mod-time 108}
-   "B" {:mod-time 107}
-   "C" {:mod-time 106}
-   "D" {:mod-time 105}
-   "E" {:mod-time 104}
-   "F" {:mod-time 103}
-   "G" {:mod-time 102}
-   "H" {:mod-time 101}
-   "I" {:mod-time 100}
-   "K" {:mod-time 99}
-   "X" {:mod-time 207}
-   "Y" {:mod-time 208 :directory true}
-   "Y/A" {:mod-time 210}
-   "Y/B" {:mod-time 212}
-   "Y/C" {:mod-time 224}})
+  {"/A" {:mod-time 108}
+   "/B" {:mod-time 107}
+   "/C" {:mod-time 106}
+   "/D" {:mod-time 105}
+   "/E" {:mod-time 104}
+   "/F" {:mod-time 103}
+   "/G" {:mod-time 102}
+   "/H" {:mod-time 101}
+   "/I" {:mod-time 100}
+   "/K" {:mod-time 99}
+   "/X" {:mod-time 207}
+   "/Y" {:mod-time 208 :directory true}
+   "/Y/A" {:mod-time 210}
+   "/Y/B" {:mod-time 212}
+   "/Y/C" {:mod-time 224}})
 
 (defn file-info-impl [fs path]
   {:path path
